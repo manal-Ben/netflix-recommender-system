@@ -1,0 +1,280 @@
+:root {
+    --netflix-red: #E50914;
+    --netflix-black: #141414;
+    --netflix-dark-gray: #181818;
+    --text-white: #e5e5e5;
+    --text-gray: #b3b3b3;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--netflix-black);
+    color: var(--text-white);
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Header */
+header {
+    padding: 20px 4%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0));
+}
+
+.logo {
+    color: var(--netflix-red);
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+}
+
+.recommender {
+    color: var(--text-white);
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    background-image: linear-gradient(to top, var(--netflix-black), rgba(0,0,0,0.5)), url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bcae-07a3f8dc141a/f6d7434e-d6de-4185-a6d4-c77a2d08737b/US-en-20220502-popsignuptwoweeks-perspective_alpha_website_medium.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 700px;
+    padding: 20px;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Search Form */
+.search-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.search-form input {
+    padding: 15px 20px;
+    width: 400px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-form button {
+    padding: 15px 30px;
+    background-color: var(--netflix-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.search-form button:hover {
+    background-color: #f40612;
+}
+
+.error-message {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ffa00a;
+    padding: 15px;
+    margin-top: 20px;
+    border-left: 4px solid #ffa00a;
+    text-align: left;
+    display: inline-block;
+}
+
+/* Results Section */
+.results-container {
+    padding: 40px 4%;
+    position: relative;
+    top: -100px; /* Overlap hero */
+}
+
+.results-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px; /* Reduced gap */
+    padding-bottom: 50px;
+}
+
+/* Movie Card */
+.movie-card {
+    background-color: var(--netflix-dark-gray);
+    border-radius: 4px;
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), z-index 0s 0.1s; /* Smooth pop */
+    cursor: pointer;
+    position: relative;
+}
+
+.movie-card:hover {
+    transform: scale(1.1); /* Standard Netflix hover effect */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 100;
+    transition-delay: 0.1s; /* Slight delay to prevent flickering */
+}
+
+/* Placeholder Art */
+.card-image {
+    height: 300px;
+    background: linear-gradient(135deg, #333 0%, #111 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.placeholder-art span {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.05); /* Subtle watermark */
+    user-select: none;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s;
+}
+
+.movie-card:hover .overlay {
+    opacity: 1;
+}
+
+.play-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    color: black;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Card Info */
+.card-info {
+    padding: 15px;
+    font-size: 0.9rem;
+}
+
+.card-info h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+}
+
+.match-score {
+    color: #46d369;
+    font-weight: bold;
+}
+
+.rating {
+    border: 1px solid var(--text-gray);
+    padding: 0 4px;
+    font-size: 0.7rem;
+}
+
+.genres {
+    color: var(--text-gray);
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.description {
+    color: var(--text-gray);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    display: none; /* Hidden by default, could show on hover if expanded */
+}
+
+.movie-card:hover .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: block; /* Show slightly on hover? Or keep clean? Let's keep clean for grid. */
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .search-form input {
+        width: 100%;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}

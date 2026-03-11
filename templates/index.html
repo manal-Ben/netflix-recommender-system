@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">NETFLIX <span class="recommender">RECOMMENDER</span></div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Find Your Next Binge</h1>
+            <p>Enter a title you love and we'll do the rest.</p>
+
+            <form method="POST" action="/" class="search-form">
+                <input type="text" name="title" placeholder="e.g. Stranger Things, Narcos..." value="{{ search_query }}"
+                    required autocomplete="off">
+                <button type="submit">Get Recommendations</button>
+            </form>
+
+            {% if error_message %}
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> {{ error_message }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if recommendations %}
+    <div class="results-container">
+        <h2>Top Picks For You</h2>
+        <div class="movie-grid">
+            {% for movie in recommendations %}
+            <div class="movie-card">
+                <div class="card-image">
+                    {% if movie.poster %}
+                    <img src="{{ movie.poster }}" alt="{{ movie.title }}"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                    {% else %}
+                    <div class="placeholder-art">
+                        <span>{{ movie.title[0] }}</span>
+                    </div>
+                    {% endif %}
+                    <div class="overlay">
+                        <button class="play-btn"><i class="fas fa-play"></i></button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <h3>{{ movie.title }}</h3>
+                    <div class="meta">
+                        <span class="match-score">98% Match</span>
+                        <span class="rating">{{ movie.rating }}</span>
+                        <span class="year">{{ movie.release_year }}</span>
+                    </div>
+                    <p class="genres">{{ movie.listed_in }}</p>
+                    <p class="description">{{ movie.description[:100] }}...</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+</body>
+
+</html>
