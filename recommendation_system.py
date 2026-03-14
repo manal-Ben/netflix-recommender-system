@@ -1,3 +1,5 @@
+# Content-based movie recommendation system
+# Developed as a machine learning project
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
