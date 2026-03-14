@@ -135,3 +135,5 @@ The model is built automatically on first startup (takes ~5–10 seconds).
 ## 📄 License
 
 This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+## Project Notes
+This project demonstrates a simple ML-based recommendation system.
